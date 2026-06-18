@@ -1,17 +1,53 @@
-# mon_app
+# SmartHome Connect 🏠
 
-A new Flutter project.
+Application mobile Flutter de gestion d'appareils connectés — Projet tutoré 2ème année IT.
 
-## Getting Started
+## 📱 Aperçu
 
-This project is a starting point for a Flutter application.
+SmartHome Connect permet de contrôler et gérer tous vos appareils connectés depuis votre smartphone : lampes, climatiseurs, prises, volets et chauffages, organisés par pièce.
 
-A few resources to get you started if this is your first Flutter project:
+## ✨ Fonctionnalités
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+- 📋 **Liste des appareils** — Affichage dynamique de tous les appareils connectés avec leur pièce et leur état
+- ➕ **Ajouter un appareil** — Formulaire complet avec nom, type et pièce
+- 🔘 **Commuter l'état** — Allumer ou éteindre chaque appareil individuellement
+- 🗑️ **Supprimer un appareil** — Suppression en un tap
+- 🌿 **Mode Éco-Responsable** — Éteint automatiquement tous les appareils et verrouille les interrupteurs pour économiser l'énergie
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 🏗️ Architecture
+## 🚀 Lancer le projet
+
+### Prérequis
+- Flutter 3.x installé
+- Android Studio avec un émulateur configuré, ou un téléphone Android en mode débogage USB
+
+### Installation
+```bash
+git clone https://github.com/CAS-DISIGN/smarthome-connect.git
+cd smarthome-connect
+flutter pub get
+flutter run
+```
+
+## 🛠️ Technologies utilisées
+
+- **Flutter 3.x** — Framework cross-platform
+- **Dart** — Langage de programmation
+- **Material Design 3** — Design system Google
+
+## 📊 Barème visé
+
+| Critère | Points |
+|---|---|
+| Fonctionnalité technique | 25 pts |
+| Interface graphique Material Design 3 | 20 pts |
+| Qualité et structure du code | 20 pts |
+| Fonctionnalités minimales (Ajouter, Commuter, Supprimer) | 15 pts |
+| Soutenance & Démo | 10 pts |
+| GitHub | 10 pts |
+| Bonus Mode Éco | +3 pts |
+| Bonus test téléphone réel | +2 pts |
+
+## 👤 Auteur
+
+Projet réalisé dans le cadre du projet tutoré — 2ème année IT
