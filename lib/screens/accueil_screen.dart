@@ -4,6 +4,7 @@ import '../models/appareil.dart';
 import '../widgets/carte_appareil.dart';
 import 'ajout_screen.dart';
 import 'tableau_bord_screen.dart';
+import 'simulation_screen.dart';
 
 
 class AccueilScreen extends StatefulWidget {
@@ -66,6 +67,18 @@ class _AccueilScreenState extends State<AccueilScreen> {
       appBar: AppBar(
   title: const Text('SmartHome Connect'),
   actions: [
+    IconButton(
+      icon: const Icon(Icons.map),
+      tooltip: 'Simulation 2D',
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => SimulationScreen(appareils: _appareils),
+          ),
+        );
+      },
+    ),
     IconButton(
       icon: const Icon(Icons.dashboard),
       tooltip: 'Tableau de bord',
