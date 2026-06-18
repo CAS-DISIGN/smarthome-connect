@@ -30,7 +30,6 @@ class _AccueilScreenState extends State<AccueilScreen> {
       context,
       MaterialPageRoute(builder: (context) => const AjoutScreen()),
     );
-
     if (nouvelAppareil != null) {
       setState(() => _appareils.add(nouvelAppareil));
     }
@@ -45,6 +44,17 @@ class _AccueilScreenState extends State<AccueilScreen> {
         }
       }
     });
+  }
+
+  IconData _iconeParPiece(String piece) {
+    switch (piece) {
+      case 'Salon': return Icons.weekend;
+      case 'Chambre': return Icons.bed;
+      case 'Cuisine': return Icons.kitchen;
+      case 'Salle de bain': return Icons.bathtub;
+      case 'Bureau': return Icons.computer;
+      default: return Icons.home;
+    }
   }
 
   @override
@@ -66,14 +76,20 @@ class _AccueilScreenState extends State<AccueilScreen> {
               ),
             ),
           ),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Mes appareils connectés',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-              ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Mes appareils connectés',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  '${_appareils.where((a) => a.estAllume).length}/${_appareils.length} allumés',
+                  style: TextStyle(fontSize: 14, color: Colors.grey.shade600),
+                ),
+              ],
             ),
           ),
           Expanded(
@@ -83,6 +99,7 @@ class _AccueilScreenState extends State<AccueilScreen> {
                 final appareil = _appareils[index];
                 return CarteAppareil(
                   appareil: appareil,
+                   iconePiece: _iconeParPiece(appareil.piece),
                   modeEcoActif: _modeEcoActif,
                   onToggle: () => _toggleAppareil(appareil.id),
                   onDelete: () => _supprimerAppareil(appareil.id),
