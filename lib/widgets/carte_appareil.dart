@@ -4,8 +4,16 @@ import '../models/appareil.dart';
 class CarteAppareil extends StatelessWidget {
   final Appareil appareil;
   final VoidCallback? onToggle;
+  final VoidCallback? onDelete;
+  final bool modeEcoActif;
 
-  const CarteAppareil({super.key, required this.appareil, this.onToggle});
+  const CarteAppareil({
+    super.key,
+    required this.appareil,
+    this.onToggle,
+    this.onDelete,
+    this.modeEcoActif = false,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +26,18 @@ class CarteAppareil extends StatelessWidget {
         ),
         title: Text(appareil.nom),
         subtitle: Text(appareil.piece),
-        trailing: Switch(
-          value: appareil.estAllume,
-          onChanged: (_) => onToggle?.call(),
+        trailing: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Switch(
+              value: appareil.estAllume,
+              onChanged: modeEcoActif ? null : (_) => onToggle?.call(),
+            ),
+            IconButton(
+              icon: const Icon(Icons.delete, color: Colors.red),
+              onPressed: onDelete,
+            ),
+          ],
         ),
       ),
     );
