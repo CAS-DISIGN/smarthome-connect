@@ -1,7 +1,10 @@
+
 import 'package:flutter/material.dart';
 import '../models/appareil.dart';
 import '../widgets/carte_appareil.dart';
 import 'ajout_screen.dart';
+import 'tableau_bord_screen.dart';
+
 
 class AccueilScreen extends StatefulWidget {
   const AccueilScreen({super.key});
@@ -60,7 +63,23 @@ class _AccueilScreenState extends State<AccueilScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('SmartHome Connect')),
+      appBar: AppBar(
+  title: const Text('SmartHome Connect'),
+  actions: [
+    IconButton(
+      icon: const Icon(Icons.dashboard),
+      tooltip: 'Tableau de bord',
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => TableauBordScreen(appareils: _appareils),
+          ),
+        );
+      },
+    ),
+  ],
+),
       body: Column(
         children: [
           Padding(
