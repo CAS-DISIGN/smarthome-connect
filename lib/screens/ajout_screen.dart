@@ -10,11 +10,13 @@ class AjoutScreen extends StatefulWidget {
 
 class _AjoutScreenState extends State<AjoutScreen> {
   final _controleurNom = TextEditingController();
+  final _controleurWatts = TextEditingController();
   String _pieceSelectionnee = 'Salon';
   String _typeSelectionne = 'Lampe';
 
   final List<String> _pieces = ['Salon', 'Chambre', 'Cuisine', 'Salle de bain', 'Bureau'];
 
+  // Watts par défaut selon le type
   final Map<String, IconData> _typesIcones = {
     'Lampe': Icons.lightbulb,
     'Climatiseur': Icons.ac_unit,
@@ -22,6 +24,20 @@ class _AjoutScreenState extends State<AjoutScreen> {
     'Volet': Icons.blinds,
     'Chauffage': Icons.thermostat,
   };
+
+  final Map<String, double> _typesWatts = {
+    'Lampe': 15,
+    'Climatiseur': 1500,
+    'Prise': 120,
+    'Volet': 50,
+    'Chauffage': 2000,
+  };
+
+  @override
+  void initState() {
+    super.initState();
+    _controleurWatts.text = _typesWatts[_typeSelectionne]!.toInt().toString();
+  }
 
   void _valider() {
     final nom = _controleurNom.text.trim();
@@ -32,11 +48,14 @@ class _AjoutScreenState extends State<AjoutScreen> {
       return;
     }
 
+    final watts = double.tryParse(_controleurWatts.text.trim()) ?? _typesWatts[_typeSelectionne]!;
+
     final nouvelAppareil = Appareil(
       id: DateTime.now().toIso8601String(),
       nom: nom,
       piece: _pieceSelectionnee,
       icone: _typesIcones[_typeSelectionne]!,
+      watts: watts,
     );
 
     Navigator.pop(context, nouvelAppareil);
@@ -45,6 +64,7 @@ class _AjoutScreenState extends State<AjoutScreen> {
   @override
   void dispose() {
     _controleurNom.dispose();
+    _controleurWatts.dispose();
     super.dispose();
   }
 
@@ -74,7 +94,13 @@ class _AjoutScreenState extends State<AjoutScreen> {
               items: _typesIcones.keys
                   .map((type) => DropdownMenuItem(value: type, child: Text(type)))
                   .toList(),
-              onChanged: (valeur) => setState(() => _typeSelectionne = valeur!),
+              onChanged: (valeur) {
+                setState(() {
+                  _typeSelectionne = valeur!;
+                  // Met à jour les watts par défaut selon le type choisi
+                  _controleurWatts.text = _typesWatts[valeur]!.toInt().toString();
+                });
+              },
             ),
             const SizedBox(height: 16),
             DropdownButtonFormField<String>(
@@ -87,6 +113,17 @@ class _AjoutScreenState extends State<AjoutScreen> {
                   .map((piece) => DropdownMenuItem(value: piece, child: Text(piece)))
                   .toList(),
               onChanged: (valeur) => setState(() => _pieceSelectionnee = valeur!),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: _controleurWatts,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                labelText: 'Consommation (Watts)',
+                suffixText: 'W',
+                border: OutlineInputBorder(),
+                helperText: 'Valeur pré-remplie selon le type, modifiable',
+              ),
             ),
             const SizedBox(height: 24),
             ElevatedButton(

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "681051309363",
+    "project_id": "smarthomme-connect",
+    "storage_bucket": "smarthomme-connect.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:681051309363:android:b7a693075593f47ec8ea46",
+        "android_client_info": {
+          "package_name": "com.example.mon_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDVC1z2pFy6hFoEpoLGMui0VAO40m-0t2w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

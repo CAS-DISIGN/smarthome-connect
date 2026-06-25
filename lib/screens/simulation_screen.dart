@@ -16,11 +16,46 @@ class _SimulationScreenState extends State<SimulationScreen>
   late Animation<double> _animation;
 
   final List<Map<String, dynamic>> _pieces = [
-    {'nom': 'Salon', 'x': 0.02, 'y': 0.02, 'w': 0.45, 'h': 0.40, 'couleur': Colors.blue},
-    {'nom': 'Chambre', 'x': 0.53, 'y': 0.02, 'w': 0.45, 'h': 0.35, 'couleur': Colors.purple},
-    {'nom': 'Cuisine', 'x': 0.02, 'y': 0.55, 'w': 0.30, 'h': 0.35, 'couleur': Colors.orange},
-    {'nom': 'Salle de bain', 'x': 0.38, 'y': 0.55, 'w': 0.25, 'h': 0.35, 'couleur': Colors.teal},
-    {'nom': 'Bureau', 'x': 0.69, 'y': 0.42, 'w': 0.29, 'h': 0.48, 'couleur': Colors.indigo},
+    {
+      'nom': 'Salon',
+      'x': 0.02,
+      'y': 0.02,
+      'w': 0.45,
+      'h': 0.40,
+      'couleur': Colors.blue,
+    },
+    {
+      'nom': 'Chambre',
+      'x': 0.53,
+      'y': 0.02,
+      'w': 0.45,
+      'h': 0.35,
+      'couleur': Colors.purple,
+    },
+    {
+      'nom': 'Cuisine',
+      'x': 0.02,
+      'y': 0.55,
+      'w': 0.30,
+      'h': 0.35,
+      'couleur': Colors.orange,
+    },
+    {
+      'nom': 'Salle de bain',
+      'x': 0.38,
+      'y': 0.55,
+      'w': 0.25,
+      'h': 0.35,
+      'couleur': Colors.teal,
+    },
+    {
+      'nom': 'Bureau',
+      'x': 0.69,
+      'y': 0.42,
+      'w': 0.29,
+      'h': 0.48,
+      'couleur': Colors.indigo,
+    },
   ];
 
   @override
@@ -30,9 +65,10 @@ class _SimulationScreenState extends State<SimulationScreen>
       vsync: this,
       duration: const Duration(seconds: 1),
     )..repeat(reverse: true);
-    _animation = Tween<double>(begin: 0.5, end: 1.0).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _animation = Tween<double>(
+      begin: 0.5,
+      end: 1.0,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -46,7 +82,9 @@ class _SimulationScreenState extends State<SimulationScreen>
   }
 
   int _countAllumes(String nomPiece) {
-    return widget.appareils.where((a) => a.piece == nomPiece && a.estAllume).length;
+    return widget.appareils
+        .where((a) => a.piece == nomPiece && a.estAllume)
+        .length;
   }
 
   @override
@@ -141,10 +179,11 @@ class _SimulationScreenState extends State<SimulationScreen>
                                   child: Text(
                                     nomPiece,
                                     style: TextStyle(
-                                      fontSize: 11,
+                                      fontSize: 10,
                                       fontWeight: FontWeight.bold,
                                       color: couleur,
                                     ),
+                                    maxLines: 2,
                                     overflow: TextOverflow.ellipsis,
                                   ),
                                 ),
@@ -155,18 +194,28 @@ class _SimulationScreenState extends State<SimulationScreen>
                                     animation: _animation,
                                     builder: (context, child) {
                                       return Container(
-                                        width: allume ? 28 * _animation.value : 20,
-                                        height: allume ? 28 * _animation.value : 20,
+                                        width: allume
+                                            ? 28 * _animation.value
+                                            : 20,
+                                        height: allume
+                                            ? 28 * _animation.value
+                                            : 20,
                                         decoration: BoxDecoration(
                                           shape: BoxShape.circle,
                                           color: allume
-                                              ? Colors.amber.withValues(alpha: _animation.value)
+                                              ? Colors.amber.withValues(
+                                                  alpha: _animation.value,
+                                                )
                                               : Colors.grey.shade800,
                                           boxShadow: allume
                                               ? [
                                                   BoxShadow(
-                                                    color: Colors.amber.withValues(
-                                                        alpha: _animation.value * 0.6),
+                                                    color: Colors.amber
+                                                        .withValues(
+                                                          alpha:
+                                                              _animation.value *
+                                                              0.6,
+                                                        ),
                                                     blurRadius: 12,
                                                     spreadRadius: 4,
                                                   ),
@@ -237,7 +286,9 @@ class _SimulationScreenState extends State<SimulationScreen>
                       style: TextStyle(
                         fontSize: 10,
                         color: allume ? couleur : Colors.grey,
-                        fontWeight: allume ? FontWeight.bold : FontWeight.normal,
+                        fontWeight: allume
+                            ? FontWeight.bold
+                            : FontWeight.normal,
                       ),
                     ),
                   ],
